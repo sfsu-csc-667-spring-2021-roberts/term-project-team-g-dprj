@@ -4,5 +4,5 @@
 
 | Team Members                 |  Github Username |
 | ---------------------------- | ---------------- |
-| Jessica Zepeda               | completed        |
+| Jessica Zepeda               |                  |
 | Diana Benavides              | dbenavi5         |
