@@ -6,3 +6,6 @@
 | ---------------------------- | ---------------- |
 | Jessica Zepeda               |                  |
 | Diana Benavides              |  dbenavi5        |
+| Phillip Gomez-Cha            |                  |
+| Robert Ruiz                  |                  |
+   
