@@ -35,3 +35,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+
+// DEBUG=term-project-teamg-sp21:* npm start
+//db name: team-g
