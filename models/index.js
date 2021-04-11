@@ -5,7 +5,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 let sequelize;
@@ -34,12 +34,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-<<<<<<< HEAD:term-project-teamG/models/index.js
 module.exports = db;
-=======
-module.exports = db;
-
-
-// DEBUG=term-project-teamg-sp21:* npm start
-//db name: team-g
->>>>>>> 9f35796d92f6e8470a53099e83e2c5ee7599b6e8:models/index.js

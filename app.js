@@ -11,6 +11,10 @@ if(process.env.NODE_ENV === 'development') {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testsRouter = require('./routes/tests');
+var loginRouter = require('./routes/unauthenticated/login');
+var registerRouter = require('./routes/unauthenticated/register');
+var gameRouter = require('./routes/authenticated/games');
+var lobbyRouter = require('./routes/authenticated/lobby');
 
 var app = express();
 
@@ -27,6 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
+app.use('/unauthenticated/login', loginRouter);
+app.use('/unauthenticated/register', registerRouter);
+app.use('/authenticated/games', gameRouter);
+app.use('/authenticated/lobby', lobbyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
