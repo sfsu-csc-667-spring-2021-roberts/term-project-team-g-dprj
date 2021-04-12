@@ -1,22 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const flash = require('express-flash');
+const session = require('express-session');
+const passport = require('passport');
 
 if(process.env.NODE_ENV === 'development') {
   require("dotenv").config();
 }
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var testsRouter = require('./routes/tests');
-var loginRouter = require('./routes/unauthenticated/login');
-var registerRouter = require('./routes/unauthenticated/register');
-var gameRouter = require('./routes/authenticated/games');
-var lobbyRouter = require('./routes/authenticated/lobby');
+const initializePassport = require('./passport-config');
+const users = []
 
-var app = express();
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const testsRouter = require('./routes/tests');
+const loginRouter = require('./routes/unauthenticated/login');
+const registerRouter = require('./routes/unauthenticated/register');
+const gameRouter = require('./routes/authenticated/games');
+const lobbyRouter = require('./routes/authenticated/lobby');
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +33,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// passport
+
+initializePassport(
+  passport, 
+  email => users.find(user => user.email === email));
+app.use(flash())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
