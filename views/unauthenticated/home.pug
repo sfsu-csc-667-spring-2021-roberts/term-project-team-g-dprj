@@ -3,12 +3,18 @@ extends ../layout
 block navigation-items
     ul
         li.nav-item
-            a(href="/authenticated/lobby") Main Lobby
+            a(href="/authenticated/lobby/0") Main Lobby
         li.nav-item
-            a(href="/authenticated/lobby/0") Game Lobby Page
+            a(href="/authenticated/game-lobby") Game Lobby Page
         li.nav-item
             a(href="/authenticated/games/0") Game Page
         li.nav-item
             a(href="/unauthenticated/login") Login
         li.nav-item
             a(href="/unauthenticated/register") Register
+
+block content 
+    div.text-center
+        div(class="form-signin")
+            div.text-center
+                p Welcome Player #{username}!

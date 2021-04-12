@@ -9,20 +9,17 @@ block navigation-items
 
 block content
     div.text-center
-        form(class="form-signin" method="POST" action="/unauthenticated/login")
-            #error
-                if error
-                    p.text-danger Error!!
+        form(class="form-signin" method="post" )
             - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
             h1(class=h1Classes) Please sign up to play
 
             //-input fullname
             label( for="fullname" class="sr-only") Fullname
-            input(type="text" name="fullname" id="fullname" class="form-control" placeholder="Fullname" required autofocus)
+            input(type="text" name="name" id="name" class="form-control" placeholder="Fullname" required autofocus)
 
             //-input email
             label( for="inputEmail" class="sr-only") Email address
-            input(type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
+            input(type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus)
 
             //-input password
             label(for="inputPassword" class="sr-only") Password
