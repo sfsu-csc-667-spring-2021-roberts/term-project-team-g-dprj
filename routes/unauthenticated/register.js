@@ -33,8 +33,10 @@ router.post("/unauthenticated/register", async (req,res) => {
     }
 
     if(errors.length > 0) {
-        res.render("/unauthenticated/register", { errors });
+        res.render("unauthenticated/register", { errors });
     } else {
+
+        // validate password
         let hashedPassword = await bcrypt.hash(password,10);
         console.log(hashedPassword);
 
@@ -50,7 +52,7 @@ router.post("/unauthenticated/register", async (req,res) => {
 
                 if(results.rows.length > 0) {
                     errors.push({ message: "Email already registered!"});
-                    res.render("register", { errors });
+                    res.render("unauthenticated/register", { errors });
                 }
             }
         )

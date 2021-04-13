@@ -34,7 +34,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
-
 // routes to game room
 app.use('/unauthenticated/login', loginRouter);
 app.use('/unauthenticated/register', registerRouter);

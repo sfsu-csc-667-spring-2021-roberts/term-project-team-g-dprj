@@ -25,8 +25,8 @@ router.get("/", (req, res) => {
     res.render("unauthenticated/login");
 });
 
-router.post("/users/login", passport.authenticate('local' , {
-    successRedirect: '/',
+router.post("/unauthenticated/login", passport.authenticate('local' , {
+    successRedirect: '/lobby',
     failureRedirect: '/login',
     failureFlash: true
 }));
