@@ -11,6 +11,7 @@ if(process.env.NODE_ENV === 'development') {
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const testsRouter = require('./routes/tests');
+const devRouter = require('./routes/dev');
 const loginRouter = require('./routes/unauthenticated/login');
 const registerRouter = require('./routes/unauthenticated/register');
 const gameRouter = require('./routes/authenticated/games');
@@ -34,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
 // routes to game room
+app.use('/dev', devRouter);
 app.use('/unauthenticated/login', loginRouter);
 app.use('/unauthenticated/register', registerRouter);
 app.use('/authenticated/games', gameRouter);
@@ -56,7 +58,7 @@ app.post("/register", async (req,res) => {
     password2
   });
 
-  let errors = []
+  // let errors = []
 
   if(!name || !email || !password || !password2) {
     errors.push({ message: 'Please enter all fields'});
