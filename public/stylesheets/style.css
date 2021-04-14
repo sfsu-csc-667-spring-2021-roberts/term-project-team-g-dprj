@@ -9,6 +9,7 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none !important;
 }
 
 .form-signin {
@@ -26,16 +27,11 @@ a {
   font-size: 16px;
 }
 
-
 .nav-item {
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-gap: 5px;
   outline:none;
-}
-
-a {
-  text-decoration: none !important;
 }
 
 .navbar-logo{
@@ -45,4 +41,8 @@ a {
 
 .cat{ 
   margin-left: 50px;
+}
+
+.sr-only{
+  display: contents;
 }
