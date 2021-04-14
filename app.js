@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+// const bcrypt = require('bcrypt');
+// const { pool } = require('./config/config')
+// const db = require("../db/connection");
 
 if(process.env.NODE_ENV === 'development') {
   require("dotenv").config();
@@ -13,6 +16,7 @@ const usersRouter = require('./routes/users');
 const testsRouter = require('./routes/tests');
 const devRouter = require('./routes/dev');
 const loginRouter = require('./routes/unauthenticated/login');
+const homeRouter = require('./routes/unauthenticated/home');
 const registerRouter = require('./routes/unauthenticated/register');
 const gameRouter = require('./routes/authenticated/games');
 const gameLobbyRouter = require('./routes/authenticated/game-lobby');
@@ -31,7 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-app.use('/', indexRouter);
+app.use('/', homeRouter);
+app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
 // routes to game room
@@ -48,9 +53,9 @@ app.post('/login', (req,res,next) => {
 });
 
 /* POST register listing. */
-app.post("/register", async (req,res) => {
+app.post("/register", async (req, res, next) => {
   let { name, email, password, password2 } = req.body;
-
+  var errors = []
   console.log({
     name, 
     email, 
@@ -58,31 +63,61 @@ app.post("/register", async (req,res) => {
     password2
   });
 
-  // let errors = []
-
-  if(!name || !email || !password || !password2) {
-    errors.push({ message: 'Please enter all fields'});
+  if (name && email && password && password2) {
+    
+    if (password != password2) {
+      errors = new Error('Passwords do not match!');
+      // errors.status = 400;
+      return next(errors);
+    }
+    else {
+      // validate password
+      let hashedPassword = await bcrypt.hash(password,10);
+      console.log(hashedPassword);
+  
+      pool.query(
+        `SELECT * FROM users
+          WHERE email $1`, 
+        [email],
+        (err, results) => {
+          if(err){
+            throw err;
+          }
+          console.log(results.rows);
+  
+          if(results.rows.length > 0) {
+            errors.push({ message: "Email already registered!"});
+            res.render("/register", { errors });
+          }
+        }
+      )
+    }
+    
   }
 
-  if(password.length < 8) {
-    errors.push({ message:'Password must be at least 8 characters'});
-  }
+  // if(!name || !email || !password || !password2) {
+  //   errors.push({ message: 'enter all fields'});
+  // }
+
+  // if(password.length < 8) {
+  //   errors.push({ message:'Password must be at least 8 characters'});
+  // }
 
   // if(password != password2) {
   //   errors.push({ message:'Passwords do not match'});
   // }
 
   // if(errors.length > 0) {
-  //   res.render("unauthenticated/register", { errors }); // render to views folder 
-  // } else {
-
+  //   res.render("unauthenticated/register", { errors, name, email, password, password2 }); // render to views folder 
+  // } 
+  // else {
   //   // validate password
   //   let hashedPassword = await bcrypt.hash(password,10);
   //   console.log(hashedPassword);
 
   //   pool.query(
   //     `SELECT * FROM users
-  //     WHERE email $1`, 
+  //       WHERE email $1`, 
   //     [email],
   //     (err, results) => {
   //       if(err){

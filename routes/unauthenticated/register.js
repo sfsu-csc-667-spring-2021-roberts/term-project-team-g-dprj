@@ -5,7 +5,7 @@ const { pool } = require('../../config/config')
 
 /* GET register listing. */
 router.get("/", (req, res) => {
-    res.render("unauthenticated/register");
+    res.render("unauthenticated/register", {message: "error"});
 });
 
 // router.post("/unauthenticated/register", async (req,res) => {
