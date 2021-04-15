@@ -1,20 +1,53 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const { pool } = require('../../config/config')
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session");
+const initializePassport = require("../../passport-config");
+const bcrypt = require("bcrypt");
+const { pool } = require("../../config/config");
 
-/* GET register listing. */
-router.get("/", (req, res) => {
-    res.render("unauthenticated/register", {message: "error"});
+// passport
+initializePassport(
+  passport,
+  (email) => users.find((user) => user.email === email),
+  (id) => users.find((user) => user.id === id)
+);
+
+router.use(flash());
+
+router.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+router.get("/login", (request, response) => {
+  response.render("unauthenticated/login");
+});
+
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/lobby",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
+
+router.get("/register", (request, response) => {
+  response.render("unauthenticated/register", { message: "error" });
 });
 
 // router.post("/unauthenticated/register", async (req,res) => {
 //     let { name, email, password, password2 } = req.body;
 
 //     console.log({
-//         name, 
-//         email, 
-//         password, 
+//         name,
+//         email,
+//         password,
 //         password2
 //     });
 
@@ -42,7 +75,7 @@ router.get("/", (req, res) => {
 
 //         pool.query(
 //             `SELECT * FROM users
-//             WHERE email $1`, 
+//             WHERE email $1`,
 //             [email],
 //             (err, results) => {
 //                 if(err){

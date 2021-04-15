@@ -1,10 +1,4 @@
-extends ../layout
-
-block navigation-items
-    li.nav-item
-        a(href="/") Home
-    li.nav-item
-        a(href="/unauthenticated/login") Login
+extends layout
 
 block content
     div.text-center
@@ -12,8 +6,8 @@ block content
             #error
                 if error
                     p.text-danger #{message}
-            - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
-            h1(class=h1Classes) Please sign up to play
+
+            h1(class="h3 mb-3 font-weight-normal") Please sign up to play
 
             //-input fullname
             label( for="fullname" class="sr-only") Fullname
@@ -30,10 +24,6 @@ block content
             //-input confirm password
             label(for="inputPassword2" class="sr-only") Confirm Password
             input(type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm Password" )
-            
-            //-signIn button
-            - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
-            button(class=buttonClass type="submit") Register
 
-            - var pClasses=['mt-5', 'mb-3', 'text-muted'];
-            p(class=pClasses) &copy; Spring 2021
+            //-signIn button
+            button(class="btn btn-lg btn-primary btn-block" type="submit") Register

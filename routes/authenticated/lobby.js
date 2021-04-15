@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../../db/connection');
+const db = require("../../db/connection");
 
-router.get("/:username", (req, res) => {
-    res.render("authenticated/lobby", { username: req.params.username });
+router.get("/", (request, response) => {
+  response.render("authenticated/lobby");
 });
 
 module.exports = router;
