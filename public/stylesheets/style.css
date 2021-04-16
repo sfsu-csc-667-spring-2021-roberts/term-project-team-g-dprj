@@ -4,11 +4,11 @@
   box-sizing: border-box;
 }
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
   text-decoration: none !important;
 }
 
@@ -31,18 +31,22 @@ a {
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-gap: 5px;
-  outline:none;
+  outline: none;
 }
 
-.navbar-logo{
+.navbar-logo {
   color: black;
   margin-left: 50px;
 }
 
-.cat{ 
+.cat {
   margin-left: 50px;
 }
 
-.sr-only{
+.sr-only {
   display: contents;
+}
+
+#error {
+  display: list-item;
 }

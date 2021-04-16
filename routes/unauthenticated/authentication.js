@@ -22,25 +22,21 @@ router.post(
   })
 );
 
-router.get('/register', (request, response, next) => {
-  response.render('unauthenticated/register', { message: 'error' });
+router.get('/register', (request, response) => {
+  response.render('unauthenticated/register');
 });
 
-router.post('/register', (request, response) => {
+router.post('/register', (request, response, next) => {
   const { name, email, password, password2 } = request.body;
 
   const errors = [];
 
   if (!name || !email || !password || !password2) {
-    errors.push({ message: 'Please enter all fields' });
-  }
-
-  if (password.length < 8) {
-    errors.push({ message: 'Password must be at least 8 characters' });
-  }
-
-  if (password != password2) {
-    errors.push({ message: 'Passwords do not match' });
+    errors.push(['Please enter all fields']);
+  } else if (password.length < 8) {
+    errors.push(['Password must be at least 8 characters']);
+  } else if (password !== password2) {
+    errors.push(['Passwords do not match']);
   }
 
   if (errors.length > 0) {
