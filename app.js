@@ -5,6 +5,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const flash = require('express-flash');
 const session = require('express-session');
+// const isAuthenticated = require('./authentication/isAuthenticated');
+const isAuthenticated = (request, response, next) => {
+  console.log('is authenticated', request.user);
+  next();
+};
 
 if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
@@ -28,7 +33,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(flash());
-app.use(passport.initialize());
 app.use(
   session({
     secret: 'keyboard cat',
@@ -37,6 +41,7 @@ app.use(
     cookie: { secure: true },
   })
 );
+app.use(passport.initialize());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -46,14 +51,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Development and testing routes
 app.use('/tests', testsRouter);
-app.use('/dev', devRouter);
+app.use('/dev', isAuthenticated, devRouter);
 
 // Unauthenticated routes
 app.use('/', homeRouter, authenticationRouter);
 
 // Authenticated routes
-app.use('/lobby', lobbyRouter);
-app.use('/games', gamesRouter);
+app.use('/lobby', isAuthenticated, lobbyRouter);
+app.use('/games', isAuthenticated, gamesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
