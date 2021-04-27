@@ -1,5 +1,107 @@
 extends layout
 
+block scripts
+  script(src='/js/lobby.js')
+  link(rel='stylesheet' href='/stylesheets/lobby.css')
+  
 block content
-  h1 Lobby
-  p Lobby placeholder page
+  .container.py-5 
+    .row.justify-content-md-center.py-3 
+      .col-md-auto 
+        h1 Welcome!
+    .row.py-3 
+      .col 
+        .container.py-3
+          .row.justify-content-md-center
+            .col-lg-11
+              .card
+                .card-header.text-center
+                  h5 Find a game
+                .card-body
+                  span(style="display:inline-flex; width:100%")
+                    input.form-control(type="search" placeholder="Search" aria-label="Search")
+                    button.btn.btn-outline-primary.my-2.my-sm-0(type="submit") Search
+                  -var list = ["Game1", "Game2", "Game3","Game4", "Game5", "Game6", "Game7", "Game8"]
+                  each item in list
+                    li.list-group-item= item
+      .col
+        .container
+          .row.justify-content-md-center.py-2 
+            .col-md-auto(style="text-align:center")
+              h5 Click here to create a game!
+          .row.justify-content-md-center.py-2 
+             .col-md-auto(style="text-align:center")
+              button(type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal") Create a game
+
+          <!-- Modal -->
+          div(class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+            div(class="modal-dialog" role="document")
+              div.modal-content 
+                h5.modal-title(id="exampleModalLabel") Modal Title 
+                button(type=button class="close" data-dismiss="modal" aria-label="Close") 
+                  
+              div.modal-body ...
+              div.modal-footer 
+                button(type="button" class="btn btn-secondary" data-dismiss="modal") Close 
+                button(type="button" class="btn btn-primary") Save changes
+
+        .container.py-5
+          .row
+            .col-md-8.mx-auto
+              .card
+                .card-header.text-center
+                  span Chat Box
+                .card-body.chat-care
+                  ul.chat
+                    li.agent.clearfix
+                      span.chat-img.left.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          strong.primary-font User 1
+                          small.right.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 12 mins ago
+                        p
+                          | Lorem ipsum dolor sit amet.
+                    li.agent.clearfix.right
+                      span.chat-img.right.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          small.left.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 13 mins ago
+                          strong.right.primary-font User 2
+                        p
+                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                          | dolor, quis ullamcorper ligula sodales.
+                    li.agent.clearfix
+                      span.chat-img.left.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          strong.primary-font User 1
+                          small.right.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 14 mins ago
+                        p
+                          | Lorem ipsum dolor sit amet.
+                    li.agent.clearfix.right
+                      span.chat-img.right.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          small.left.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 15 mins ago
+                          strong.right.primary-font User 2
+                        p
+                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                          | dolor.
+                .card-footer
+                  .input-group
+                    input#btn-input.form-control.input-sm(type='text' placeholder='Type your message here...')
+                    span.input-group-btn
+                      button#btn-chat.btn.btn-primary
+                        | Send

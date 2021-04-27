@@ -1,5 +1,102 @@
 extends layout
-
+block scripts
+  script(src='/js/lobby.js')
+  link(rel='stylesheet' href='/stylesheets/lobby.css')
+  
 block content
-  h1 Game Lobby #{gameId}
-  p this is the game lobby page
+  .container.py-5 
+    .row.justify-content-md-center 
+      .col-md-auto 
+        h1 Waiting for game to start...
+    .row.justify-content-md-center.py-4 
+      .col-md-auto(style="text-align:center")
+        button(type="button" class="btn btn-primary btn-lg" data-toggle="ready") Ready Up
+    .row.py-5 
+      .col 
+        .container.py-3
+          .row.justify-content-md-center
+            .col-lg-11
+              .card.text-white.bg-dark.mb-3
+                .card-header.text-center
+                  h5 Game Rules
+                .card-body
+                  ol 
+                     -var list = ["Give 1 Defuse card to each player. If 2-3 players, then only put 2 defuse cards back into the deck.", "Shuffle the deck and deal 7 cards to each player.", "Add in Exploding Kittens into the deck the number of cards should equal to the amount of people minus 1. The deck will then be shuffled; this will be the draw pile.","The first player can pass or play a card but in the end their turn by drawing a card from the top of the Draw pile.", "The player who doesn’t explode wins the game."]
+                     each item in list
+                      li.card-text.mb-4.mt-2= item
+              
+      .col
+        .container.py-2
+          .row.justify-content-md-center.py-2
+            .col-md-auto(style="text-align:center")
+              h5 Players In Lobby
+          .row.py-2(style="text-align:center") 
+            .col 
+                img(style="border-radius: 50%;" src='http://placehold.it/50/55C1E7/fff&text=U' alt='user')
+            .col 
+                img(style="border-radius: 50%;" src='http://placehold.it/50/55C1E7/fff&text=U' alt='user')
+            .col 
+                img(style="border-radius: 50%;" src='http://placehold.it/50/55C1E7/fff&text=U' alt='user')
+            .col 
+                img(style="border-radius: 50%;" src='http://placehold.it/50/55C1E7/fff&text=U' alt='user')
+
+        .container.py-5
+          .row
+            .col-md-8.mx-auto
+              .card
+                .card-header.text-center
+                  span Chat Box
+                .card-body.chat-care
+                  ul.chat
+                    li.agent.clearfix
+                      span.chat-img.left.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          strong.primary-font User 1
+                          small.right.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 12 mins ago
+                        p
+                          | Lorem ipsum dolor sit amet.
+                    li.agent.clearfix.right
+                      span.chat-img.right.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          small.left.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 13 mins ago
+                          strong.right.primary-font User 2
+                        p
+                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                          | dolor, quis ullamcorper ligula sodales.
+                    li.agent.clearfix
+                      span.chat-img.left.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          strong.primary-font User 1
+                          small.right.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 14 mins ago
+                        p
+                          | Lorem ipsum dolor sit amet.
+                    li.agent.clearfix.right
+                      span.chat-img.right.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          small.left.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 15 mins ago
+                          strong.right.primary-font User 2
+                        p
+                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                          | dolor.
+                .card-footer
+                  .input-group
+                    input#btn-input.form-control.input-sm(type='text' placeholder='Type your message here...')
+                    span.input-group-btn
+                      button#btn-chat.btn.btn-primary
+                        | Send
