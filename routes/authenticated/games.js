@@ -21,6 +21,22 @@ router.get('/:id', (request, response) => {
     .catch((error) => console.log(error));
 });
 
+router.get('/:id/join', (request, response) => {
+  const { id } = request.params;
+
+  Games.findById(id)
+    .then((game) => {
+      if (game.players.length === game.number_of_players) {
+        response.redirect('/lobby');
+        Promise.reject('done');
+      } else {
+        return Games.addPlayer(id, 11);
+      }
+    })
+    .then(({ id }) => response.redirect(`/games/${id}/lobby`))
+    .catch((error) => {});
+});
+
 router.get('/:id/lobby', (request, response) => {
   const { id } = request.params;
 

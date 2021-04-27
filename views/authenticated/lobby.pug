@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1 Lobby
-  p Lobby placeholder page
+
+  .games-list
+    ul
+      each game in games
+        - let liId = `join-game-${game.id}`
+        li(id=liId)
+          a(href=game.joinUrl) Join #{game.name}

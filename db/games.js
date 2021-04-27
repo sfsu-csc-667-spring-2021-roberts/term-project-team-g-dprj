@@ -1,5 +1,10 @@
 const db = require('./connection');
 
+const allOpenGames = () =>
+  db.any(
+    'SELECT id, number_of_players, name FROM games WHERE number_of_players > (SELECT count(*) FROM game_users WHERE game_id=id)'
+  );
+
 const create = (name, numberOfPlayers, userId) =>
   db
     .one('INSERT INTO games (name, number_of_players) VALUES ($1, $2) RETURNING id', [name, numberOfPlayers])
@@ -17,4 +22,4 @@ const findById = (id) =>
     ),
   ]).then(([game, players]) => ({ ...game, players }));
 
-module.exports = { create, addPlayer, findById };
+module.exports = { allOpenGames, create, addPlayer, findById };
