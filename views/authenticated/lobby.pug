@@ -3,9 +3,18 @@ extends layout
 block content
   h1 Lobby
 
-  .games-list
-    ul
-      each game in games
-        - let liId = `join-game-${game.id}`
-        li(id=liId)
-          a(href=game.joinUrl) Join #{game.name}
+  .row
+    .games-list.col
+      ul
+        each game in games
+          - let liId = `join-game-${game.id}`
+          li(id=liId)
+            a(href=game.joinUrl) Join #{game.name}
+
+    .chat.col-6
+      #messages
+      input#message-box(type="text", name="")
+      button#message-submit.btn(type="submit", value="Send") OK
+
+block scripts
+  script(src="/scripts/lobby.js")
