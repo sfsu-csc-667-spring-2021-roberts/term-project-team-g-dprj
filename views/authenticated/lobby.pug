@@ -11,6 +11,12 @@ block content
           li(id=liId)
             a(href=game.joinUrl) Join #{game.name}
 
+      form(method="post" action="/games/create")
+        input#game-name(type="text", name="gameName")
+        input#number-of-players(type="number", name="numberOfPlayers")
+        button#create-game.btn(type="submit", value="Create") Create Game
+
+
     .chat.col-6
       #messages
       input#message-box(type="text", name="")
