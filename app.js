@@ -5,11 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const flash = require('express-flash');
 const session = require('express-session');
-// const isAuthenticated = require('./authentication/isAuthenticated');
-const isAuthenticated = (request, response, next) => {
-  console.log('is authenticated', request.user);
-  next();
-};
+const isAuthenticated = require('./authentication/isAuthenticated');
 
 if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
@@ -47,10 +43,11 @@ app.use(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { secure: false },
   })
 );
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -83,6 +80,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  console.log('ERROR HANDLER', err);
   res.render('error');
 });
 
