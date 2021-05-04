@@ -15,7 +15,9 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
 }
 // Environment needs to be loaded before we can load passport (so we can connect to the DB)
+// and pusher.js
 const passport = require('./authentication/config');
+const pusher = require('./sockets');
 
 const testsRouter = require('./routes/tests');
 const devRouter = require('./routes/dev');
@@ -25,12 +27,14 @@ const authenticationRouter = require('./routes/unauthenticated/authentication');
 
 const lobbyRouter = require('./routes/authenticated/lobby');
 const gamesRouter = require('./routes/authenticated/games');
+const chatRouter = require('./routes/authenticated/chat');
 
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.set('pusher', pusher);
 
 app.use(flash());
 app.use(
@@ -59,6 +63,7 @@ app.use('/', homeRouter, authenticationRouter);
 // Authenticated routes
 app.use('/lobby', isAuthenticated, lobbyRouter);
 app.use('/games', isAuthenticated, gamesRouter);
+app.use('/chat', isAuthenticated, chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
