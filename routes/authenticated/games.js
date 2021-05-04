@@ -3,6 +3,16 @@ const router = express.Router();
 const db = require('../../db/connection');
 const Games = require('../../db').Games;
 
+router.post('/create', (request, response) => {
+  const { gameName = 'New Game', numberOfPlayers = 4 } = request.body;
+
+  Games.create(gameName, numberOfPlayers, 11)
+    .then(({ id }) => {
+      response.redirect(`/games/${id}`);
+    })
+    .catch((error) => response.json(error));
+});
+
 router.get('/:id', (request, response) => {
   const { id } = request.params;
 

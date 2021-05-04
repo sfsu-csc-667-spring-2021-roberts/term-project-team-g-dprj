@@ -38,6 +38,11 @@ app.set('pusher', pusher);
 
 app.use(flash());
 app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(
   session({
     secret: 'keyboard cat',
     resave: false,
