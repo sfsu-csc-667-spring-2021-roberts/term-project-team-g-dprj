@@ -5,8 +5,9 @@ const Games = require('../../db').Games;
 
 router.post('/create', (request, response) => {
   const { gameName = 'New Game', numberOfPlayers = 4 } = request.body;
+  const { id: userId } = request.user;
 
-  Games.create(gameName, numberOfPlayers, 11)
+  Games.create(gameName, numberOfPlayers, userId)
     .then(({ id }) => {
       response.redirect(`/games/${id}`);
     })
@@ -20,7 +21,7 @@ router.get('/:id', (request, response) => {
     .then((game) => {
       if (game.players.length < game.number_of_players) {
         response.redirect(`/games/${id}/lobby`);
-        Promise.reject('done');
+        return Promise.reject('done');
       } else {
         return game;
       }
@@ -33,6 +34,7 @@ router.get('/:id', (request, response) => {
 
 router.get('/:id/join', (request, response) => {
   const { id } = request.params;
+  const { id: userId } = request.user;
 
   Games.findById(id)
     .then((game) => {
@@ -40,7 +42,7 @@ router.get('/:id/join', (request, response) => {
         response.redirect('/lobby');
         Promise.reject('done');
       } else {
-        return Games.addPlayer(id, 11);
+        return Games.addPlayer(id, userId);
       }
     })
     .then(({ id }) => response.redirect(`/games/${id}/lobby`))
