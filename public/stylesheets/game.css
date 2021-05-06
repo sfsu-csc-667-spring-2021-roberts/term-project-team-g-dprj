@@ -8,6 +8,21 @@
   border: 1px solid white !important;
 }
 
+.playing-card-v2 {
+  width: 170px;
+  height: 120px;
+  border: 1px solid white !important;
+}
+.vertical-card {
+  margin-top: -50%;
+}
+
+.col-card {
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  display: flex;
+}
 .chat {
   list-style: none;
   margin: 0;

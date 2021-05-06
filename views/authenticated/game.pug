@@ -2,36 +2,75 @@ extends layout
 
 block scripts
   link(rel='stylesheet' href='/stylesheets/game.css')
+  script(src="/scripts/game.js")
 
 block content
   h1 Game #{gameId}
   .row
     .col-lg-9
-      .row.py-3      
+      .row.py-5      
           .col 
             .container
-              .row.d-flex.justify-content-center
-                .col-md-4
-                  .row.d-flex.justify-content-center(style="margin-left:-40%")
-                      .col-sm-1
-                        .card.text-white.bg-dark.playing-card
+              .row.d-flex.justify-content-center#row-1
+                .col-md-6.d-flex.justify-content-center
+                  .col-md-4
+                    .row.d-flex.justify-content-center(style="margin-left:-55%")
+                        .col-sm-1
+                          .card.text-white.bg-dark.playing-card
+                              .card-body
+                        .col-sm-1
+                          .card.text-white.bg-dark.playing-card
                             .card-body
-                      .col-sm-1
-                        .card.text-white.bg-dark.playing-card
-                          .card-body
-                      .col-sm-1
-                        .card.text-white.bg-dark.playing-card
-                          .card-body
-                      .col-sm-1
-                        .card.text-white.bg-dark.playing-card
-                          .card-body
-                      .col-sm-1
-                        .card.text-white.bg-dark.playing-card
-                          .card-body
-      .row.py-3     
+                        .col-sm-1
+                          .card.text-white.bg-dark.playing-card
+                            .card-body
+                        .col-sm-1
+                          .card.text-white.bg-dark.playing-card
+                            .card-body
+                        .col-sm-1
+                          .card.text-white.bg-dark.playing-card
+                            .card-body
+                //-adding a third player
+                //- .col-md-6.d-flex.justify-content-center
+                  //- .col-md-4
+                  //-   .row.d-flex.justify-content-center(style="margin-left:-55%")
+                  //-       .col-sm-1
+                  //-         .card.text-white.bg-dark.playing-card
+                  //-             .card-body
+                  //-       .col-sm-1
+                  //-         .card.text-white.bg-dark.playing-card
+                  //-           .card-body
+                  //-       .col-sm-1
+                  //-         .card.text-white.bg-dark.playing-card
+                  //-           .card-body
+                  //-       .col-sm-1
+                  //-         .card.text-white.bg-dark.playing-card
+                  //-           .card-body
+                  //-       .col-sm-1
+                  //-         .card.text-white.bg-dark.playing-card
+                  //-           .card-body
+      .row.py-5     
           .container.py-3
-            .row.d-flex.justify-content-center
-              .col-md-5
+            .row.d-flex.justify-content-center#row-2
+              //-adding a 5th player
+              //- .col-md-3.d-flex.justify-content-center(style="padding-top:5%")
+              //-   .col-card
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-           .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              .col-md-6
                 .card
                   .row.py-3.d-flex.justify-content-center
                     .col-sm-4
@@ -41,11 +80,29 @@ block content
                       .card.text-white.bg-dark.playing-card
                           .card-body 
                             p(style="text-align:center;") Place Hand Here
-      .row.py-3  
+              //-adding a 4th player
+              //- .col-md-3.d-flex.justify-content-center(style="padding-top:5%")
+              //-   .col-card
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-           .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+              //-     .row-sm-1.vertical-card
+              //-       .card.text-white.bg-dark.playing-card-v2
+              //-         .card-body
+      .row.py-5  
             .container
               .row.d-flex.justify-content-center
-                .col-md-7
-                  .row.d-flex.justify-content-center(style="margin-left:-10%")
+                .col-md-6
+                  .row.d-flex.justify-content-center(style="margin-left:-15%")
                     .col-sm-2
                       .card.text-white.bg-dark.playing-card
                         .card-body
