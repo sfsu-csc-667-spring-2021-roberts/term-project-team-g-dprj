@@ -1,5 +1,121 @@
 extends layout
 
+block scripts
+  link(rel='stylesheet' href='/stylesheets/game.css')
+
 block content
   h1 Game #{gameId}
-  p this is the game page (for game #{gameid})
+  .row
+    .col-lg-9
+      .row.py-3      
+          .col 
+            .container
+              .row.d-flex.justify-content-center
+                .col-md-4
+                  .row.d-flex.justify-content-center(style="margin-left:-40%")
+                      .col-sm-1
+                        .card.text-white.bg-dark.playing-card
+                            .card-body
+                      .col-sm-1
+                        .card.text-white.bg-dark.playing-card
+                          .card-body
+                      .col-sm-1
+                        .card.text-white.bg-dark.playing-card
+                          .card-body
+                      .col-sm-1
+                        .card.text-white.bg-dark.playing-card
+                          .card-body
+                      .col-sm-1
+                        .card.text-white.bg-dark.playing-card
+                          .card-body
+      .row.py-3     
+          .container.py-3
+            .row.d-flex.justify-content-center
+              .col-md-5
+                .card
+                  .row.py-3.d-flex.justify-content-center
+                    .col-sm-4
+                      .card.text-white.bg-dark.playing-card
+                          .card-body
+                    .col-sm-4
+                      .card.text-white.bg-dark.playing-card
+                          .card-body 
+                            p(style="text-align:center;") Place Hand Here
+      .row.py-3  
+            .container
+              .row.d-flex.justify-content-center
+                .col-md-7
+                  .row.d-flex.justify-content-center(style="margin-left:-10%")
+                    .col-sm-2
+                      .card.text-white.bg-dark.playing-card
+                        .card-body
+                    .col-sm-2
+                      .card.text-white.bg-dark.playing-card
+                        .card-body
+                    .col-sm-2
+                      .card.text-white.bg-dark.playing-card
+                        .card-body
+                    .col-sm-2
+                      .card.text-white.bg-dark.playing-card
+                        .card-body
+                    .col-sm-2
+                      .card.text-white.bg-dark.playing-card
+                        .card-body
+    .col-sm-3.d-flex.align-items-center
+              .card
+                .card-header.text-center
+                  span Chat Box
+                .card-body.chat-care
+                  ul.chat
+                    li.agent.clearfix
+                      span.chat-img.left.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          strong.primary-font User 1
+                          small.right.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 12 mins ago
+                        p
+                          | Lorem ipsum dolor sit amet.
+                    li.agent.clearfix.right
+                      span.chat-img.right.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          small.left.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 13 mins ago
+                          strong.right.primary-font User 2
+                        p
+                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                          | dolor, quis ullamcorper ligula sodales.
+                    li.agent.clearfix
+                      span.chat-img.left.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          strong.primary-font User 1
+                          small.right.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 14 mins ago
+                        p
+                          | Lorem ipsum dolor sit amet.
+                    li.agent.clearfix.right
+                      span.chat-img.right.clearfix.mx-2
+                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
+                      .chat-body.clearfix
+                        .header.clearfix
+                          small.left.text-muted
+                            span.glyphicon.glyphicon-time
+                            | 15 mins ago
+                          strong.right.primary-font User 2
+                        p
+                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                          | dolor.
+                .card-footer
+                  .input-group
+                    input#btn-input.form-control.input-sm(type='text' placeholder='Type your message here...')
+                    span.input-group-btn
+                      button#btn-chat.btn.btn-primary
+                        | Send
