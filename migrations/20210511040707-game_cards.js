@@ -5,6 +5,7 @@ module.exports = {
     return queryInterface.createTable('game_cards', {
       game_id: { type: Sequelize.INTEGER, allowNull: false },
       user_id: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
+      card_id: { type: Sequelize.INTEGER, allowNull: false },
       ordering: { type: Sequelize.INTEGER, allowNull: false },
       hand_order: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
     });
