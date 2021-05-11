@@ -40,10 +40,11 @@ app.use(
 );
 app.use(
   session({
+    store: new (require('connect-pg-simple')(session))(),
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: { secure: false, maxAge: 30 * 24 * 60 * 60 * 1000 },
   })
 );
 app.use(passport.initialize());

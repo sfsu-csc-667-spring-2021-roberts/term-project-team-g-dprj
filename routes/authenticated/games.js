@@ -16,9 +16,11 @@ router.post('/create', (request, response) => {
 
 router.get('/:id', (request, response) => {
   const { id } = request.params;
+  const { id: userId } = request.user;
 
   Games.findById(id)
     .then((game) => {
+      console.log(game);
       if (game.players.length < game.number_of_players) {
         response.redirect(`/games/${id}/lobby`);
         return Promise.reject('done');
@@ -27,7 +29,20 @@ router.get('/:id', (request, response) => {
       }
     })
     .then((game) => {
-      response.render('authenticated/game', { gameId: request.params.id });
+      response.render('authenticated/game', {
+        game: {
+          ...game,
+          players: game.players
+            .sort((a, b) => a.player_order > b.player_order)
+            .map((player) => {
+              if (player.id === userId) {
+                return { ...player, current: true };
+              } else {
+                return player;
+              }
+            }),
+        },
+      });
     })
     .catch((error) => console.log(error));
 });

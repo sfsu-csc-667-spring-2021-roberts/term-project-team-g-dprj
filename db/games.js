@@ -9,6 +9,7 @@ const create = (name, numberOfPlayers, userId) =>
   db
     .one('INSERT INTO games (name, number_of_players) VALUES ($1, $2) RETURNING id', [name, numberOfPlayers])
     .then(({ id }) => addPlayer(id, userId));
+// For this gameId, we need to copy all cards in card_list table into game_cards table, shuffled
 
 const addPlayer = (gameId, userId) =>
   db.one('INSERT INTO game_users VALUES ($1, $2) RETURNING game_id AS id', [gameId, userId]);

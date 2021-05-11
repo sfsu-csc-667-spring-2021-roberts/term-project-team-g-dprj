@@ -5,120 +5,17 @@ block scripts
   script(src="/scripts/game.js")
 
 block content
-  h1 Game #{gameId}
+  h1 Game #{game.id}
+
   .row
-    .col-lg-9
-      .row.py-5      
-          .col 
-            .container
-              .row.d-flex.justify-content-center#row-1
-                .col-md-6.d-flex.justify-content-center
-                  .col-md-4
-                    .row.d-flex.justify-content-center(style="margin-left:-55%")
-                        .col-sm-1
-                          .card.text-white.bg-dark.playing-card
-                              .card-body
-                        .col-sm-1
-                          .card.text-white.bg-dark.playing-card
-                            .card-body
-                        .col-sm-1
-                          .card.text-white.bg-dark.playing-card
-                            .card-body
-                        .col-sm-1
-                          .card.text-white.bg-dark.playing-card
-                            .card-body
-                        .col-sm-1
-                          .card.text-white.bg-dark.playing-card
-                            .card-body
-                //-adding a third player
-                //- .col-md-6.d-flex.justify-content-center
-                  //- .col-md-4
-                  //-   .row.d-flex.justify-content-center(style="margin-left:-55%")
-                  //-       .col-sm-1
-                  //-         .card.text-white.bg-dark.playing-card
-                  //-             .card-body
-                  //-       .col-sm-1
-                  //-         .card.text-white.bg-dark.playing-card
-                  //-           .card-body
-                  //-       .col-sm-1
-                  //-         .card.text-white.bg-dark.playing-card
-                  //-           .card-body
-                  //-       .col-sm-1
-                  //-         .card.text-white.bg-dark.playing-card
-                  //-           .card-body
-                  //-       .col-sm-1
-                  //-         .card.text-white.bg-dark.playing-card
-                  //-           .card-body
-      .row.py-5     
-          .container.py-3
-            .row.d-flex.justify-content-center#row-2
-              //-adding a 5th player
-              //- .col-md-3.d-flex.justify-content-center(style="padding-top:5%")
-              //-   .col-card
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-           .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              .col-md-6
-                .card
-                  .row.py-3.d-flex.justify-content-center
-                    .col-sm-4
-                      .card.text-white.bg-dark.playing-card
-                          .card-body
-                    .col-sm-4
-                      .card.text-white.bg-dark.playing-card
-                          .card-body 
-                            p(style="text-align:center;") Place Hand Here
-              //-adding a 4th player
-              //- .col-md-3.d-flex.justify-content-center(style="padding-top:5%")
-              //-   .col-card
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-           .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-              //-     .row-sm-1.vertical-card
-              //-       .card.text-white.bg-dark.playing-card-v2
-              //-         .card-body
-      .row.py-5  
-            .container
-              .row.d-flex.justify-content-center
-                .col-md-6
-                  .row.d-flex.justify-content-center(style="margin-left:-15%")
-                    .col-sm-2
-                      .card.text-white.bg-dark.playing-card
-                        .card-body
-                    .col-sm-2
-                      .card.text-white.bg-dark.playing-card
-                        .card-body
-                    .col-sm-2
-                      .card.text-white.bg-dark.playing-card
-                        .card-body
-                    .col-sm-2
-                      .card.text-white.bg-dark.playing-card
-                        .card-body
-                    .col-sm-2
-                      .card.text-white.bg-dark.playing-card
-                        .card-body
-    .col-sm-3.d-flex.align-items-center
+    #game-table.col-lg-9
+      .deck
+        p This is the deck area
+      .players
+        each player in game.players
+          .player(id=`player-${player.id}` class=`of${game.players.length - 1} ${player.current ? 'current' : ''}`)= player.fullname
+
+    #game-chat.col-sm-3.d-flex.align-items-center
               .card
                 .card-header.text-center
                   span Chat Box
