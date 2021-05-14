@@ -1,10 +1,32 @@
 extends layout
 
+block styles
+  link(rel="stylesheet" href="/stylesheets/chat.css")
+
 block content
   h1 Game Lobby - #{name}
 
-  h2 Players
+  .row
+    h2 Players
 
-  ul
-    each player in players
-      li= player.fullname
+    .players-list.col
+      ul#players-list
+        each player in players
+          li
+            img.user-icon(src=`https://www.gravatar.com/avatar/${player.hash}?s=30` alt=`${player.fullname}`)
+            span= player.fullname
+
+    .chat.col-6
+      input#gameId(type="hidden" value=id)
+      .row
+        #messages
+
+      .row
+        .col-md-11
+          input.form-control#message-box(type="text" name="message" placeholder="Enter your message")
+        .col-md-1
+          button#message-submit.btn.btn-primary(type="submit" value="Send") OK
+
+block scripts
+  script(src="/scripts/chat.js")
+  script(src="/scripts/game-lobby.js")

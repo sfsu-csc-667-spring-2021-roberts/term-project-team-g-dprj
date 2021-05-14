@@ -1,5 +1,8 @@
 extends layout
 
+block styles
+  link(rel="stylesheet" href="/stylesheets/chat.css")
+
 block scripts
   link(rel='stylesheet' href='/stylesheets/game.css')
   script(src="/scripts/game.js")
@@ -8,68 +11,24 @@ block content
   h1 Game #{game.id}
 
   .row
-    #game-table.col-lg-9
+    #game-table.col
       .deck
         p This is the deck area
       .players
         each player in game.players
           .player(id=`player-${player.id}` class=`of${game.players.length - 1} ${player.current ? 'current' : ''}`)= player.fullname
 
-    #game-chat.col-sm-3.d-flex.align-items-center
-              .card
-                .card-header.text-center
-                  span Chat Box
-                .card-body.chat-care
-                  ul.chat
-                    li.agent.clearfix
-                      span.chat-img.left.clearfix.mx-2
-                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
-                      .chat-body.clearfix
-                        .header.clearfix
-                          strong.primary-font User 1
-                          small.right.text-muted
-                            span.glyphicon.glyphicon-time
-                            | 12 mins ago
-                        p
-                          | Lorem ipsum dolor sit amet.
-                    li.agent.clearfix.right
-                      span.chat-img.right.clearfix.mx-2
-                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
-                      .chat-body.clearfix
-                        .header.clearfix
-                          small.left.text-muted
-                            span.glyphicon.glyphicon-time
-                            | 13 mins ago
-                          strong.right.primary-font User 2
-                        p
-                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                          | dolor, quis ullamcorper ligula sodales.
-                    li.agent.clearfix
-                      span.chat-img.left.clearfix.mx-2
-                        img.img-circle(src='http://placehold.it/50/55C1E7/fff&text=U' alt='Agent')
-                      .chat-body.clearfix
-                        .header.clearfix
-                          strong.primary-font User 1
-                          small.right.text-muted
-                            span.glyphicon.glyphicon-time
-                            | 14 mins ago
-                        p
-                          | Lorem ipsum dolor sit amet.
-                    li.agent.clearfix.right
-                      span.chat-img.right.clearfix.mx-2
-                        img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME' alt='Admin')
-                      .chat-body.clearfix
-                        .header.clearfix
-                          small.left.text-muted
-                            span.glyphicon.glyphicon-time
-                            | 15 mins ago
-                          strong.right.primary-font User 2
-                        p
-                          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                          | dolor.
-                .card-footer
-                  .input-group
-                    input#btn-input.form-control.input-sm(type='text' placeholder='Type your message here...')
-                    span.input-group-btn
-                      button#btn-chat.btn.btn-primary
-                        | Send
+    .chat.col-4
+      input#gameId(type="hidden" value=game.id)
+      .row
+        #messages
+
+      .row
+        .col-md-11
+          input.form-control#message-box(type="text" name="message" placeholder="Enter your message")
+        .col-md-1
+          button#message-submit.btn.btn-primary(type="submit" value="Send") OK
+
+block scripts
+  script(src="/scripts/chat.js")
+  script(src="/scripts/game-lobby.js")
