@@ -1,26 +1,40 @@
 extends layout
 
+block styles
+  link(rel="stylesheet" href="/stylesheets/chat.css")
+
 block content
   h1 Lobby
 
   .row
     .games-list.col
-      ul
+      h2 Create a game
+
+      form.row(method="post" action="/games/create")
+        div.col-md-4
+          input.form-control#game-name(type="text" name="gameName" placeholder="Game name")
+        div.col-md-4
+          input.form-control#number-of-players(type="number" name="numberOfPlayers" placeholder="# of players")
+        div.col-md-4
+          button#create-game.btn.btn-primary(type="submit" value="Create") Create Game
+
+      h2 Join a game
+
+      ul#game-list
         each game in games
           - let liId = `join-game-${game.id}`
           li(id=liId)
             a(href=game.joinUrl) Join #{game.name}
 
-      form(method="post" action="/games/create")
-        input#game-name(type="text", name="gameName")
-        input#number-of-players(type="number", name="numberOfPlayers")
-        button#create-game.btn(type="submit", value="Create") Create Game
-
-
     .chat.col-6
-      #messages
-      input#message-box(type="text", name="")
-      button#message-submit.btn(type="submit", value="Send") OK
+      .row
+        #messages
+
+      .row
+        .col-md-11
+          input.form-control#message-box(type="text" name="message" placeholder="Enter your message")
+        .col-md-1
+          button#message-submit.btn.btn-primary(type="submit" value="Send") OK
 
 block scripts
   script(src="/scripts/lobby.js")

@@ -7,8 +7,10 @@ const allOpenGames = () =>
 
 const create = (name, numberOfPlayers, userId) =>
   db
-    .one('INSERT INTO games (name, number_of_players) VALUES ($1, $2) RETURNING id', [name, numberOfPlayers])
-    .then(({ id }) => addPlayer(id, userId));
+    .one('INSERT INTO games (name, number_of_players) VALUES ($1, $2) RETURNING id, name', [name, numberOfPlayers])
+    .then(({ id, name }) => Promise.all([{ id, name }, addPlayer(id, userId)]))
+    .then(([game, playerInfo]) => game);
+
 // For this gameId, we need to copy all cards in card_list table into game_cards table, shuffled
 // * select * from card_list => array of cards
 // * shuffle that array

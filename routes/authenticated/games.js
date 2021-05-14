@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../db/connection');
 const Games = require('../../db').Games;
+const pusher = require('../../sockets');
 
 router.post('/create', (request, response) => {
   const { gameName = 'New Game', numberOfPlayers = 4 } = request.body;
   const { id: userId } = request.user;
 
   Games.create(gameName, numberOfPlayers, userId)
-    .then(({ id }) => {
+    .then(({ id, name }) => {
+      pusher.trigger('game-listing', 'added', { id, name });
       response.redirect(`/games/${id}`);
     })
     .catch((error) => response.json(error));
@@ -44,7 +46,10 @@ router.get('/:id', (request, response) => {
         },
       });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      response.redirect('/lobby');
+    });
 });
 
 router.get('/:id/join', (request, response) => {
@@ -56,12 +61,19 @@ router.get('/:id/join', (request, response) => {
       if (game.players.length === game.number_of_players) {
         response.redirect('/lobby');
         Promise.reject('done');
+      } else if (game.players.find((player) => player.id === userId)) {
+        // User already in the game
+        response.redirect('/lobby');
+        Promise.reject('done');
       } else {
         return Games.addPlayer(id, userId);
       }
     })
     .then(({ id }) => response.redirect(`/games/${id}/lobby`))
-    .catch((error) => {});
+    .catch((error) => {
+      console.log(error);
+      response.redirect('/lobby');
+    });
 });
 
 router.get('/:id/lobby', (request, response) => {

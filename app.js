@@ -24,6 +24,7 @@ const authenticationRouter = require('./routes/unauthenticated/authentication');
 const lobbyRouter = require('./routes/authenticated/lobby');
 const gamesRouter = require('./routes/authenticated/games');
 const chatRouter = require('./routes/authenticated/chat');
+const usersRouter = require('./routes/authenticated/users');
 
 const app = express();
 
@@ -67,6 +68,7 @@ app.use('/', homeRouter, authenticationRouter);
 app.use('/lobby', isAuthenticated, lobbyRouter);
 app.use('/games', isAuthenticated, gamesRouter);
 app.use('/chat', isAuthenticated, chatRouter);
+app.use('/users', isAuthenticated, usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
