@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const db = require('./connection');
 
 const allOpenGames = () =>
@@ -28,6 +29,24 @@ const findById = (id) =>
       'SELECT users.id, users.fullname, users.email FROM game_users, users WHERE game_users.game_id=$1 AND game_users.user_id=users.id',
       [id]
     ),
-  ]).then(([game, players]) => ({ ...game, players }));
+  ]).then(([game, players]) => ({ ...game, players: players.map((player) => ({ ...player, hash: md5(player.id) })) }));
 
-module.exports = { allOpenGames, create, addPlayer, findById };
+const debug = (result) => {
+  console.log(result);
+  return result;
+};
+
+const activeGames = (userId) =>
+  db
+    .any('SELECT game_id FROM game_users WHERE user_id=$1', [userId])
+    .then((result) => result.map(({ game_id }) => game_id))
+    .then((gameIds) => {
+      if (gameIds.length > 0) {
+        return db.any('SELECT * FROM games WHERE id IN ($1:csv)', [gameIds]);
+      } else {
+        return [];
+      }
+    })
+    .catch(console.log);
+
+module.exports = { allOpenGames, create, addPlayer, findById, activeGames };

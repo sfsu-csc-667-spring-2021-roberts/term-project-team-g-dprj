@@ -18,6 +18,13 @@ block content
         div.col-md-4
           button#create-game.btn.btn-primary(type="submit" value="Create") Create Game
 
+      h2 Active games
+
+      ul#active-game-list
+        each game in activeGames
+          li
+            a(href=game.joinUrl) Return to #{game.name}
+
       h2 Join a game
 
       ul#game-list
@@ -27,6 +34,7 @@ block content
             a(href=game.joinUrl) Join #{game.name}
 
     .chat.col-6
+      input#gameId(type="hidden" value="0")
       .row
         #messages
 
@@ -38,3 +46,4 @@ block content
 
 block scripts
   script(src="/scripts/lobby.js")
+  script(src="/scripts/chat.js")
