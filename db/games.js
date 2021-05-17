@@ -12,12 +12,28 @@ const create = (name, numberOfPlayers, userId) =>
     .then(({ id, name }) => Promise.all([{ id, name }, addPlayer(id, userId)]))
     .then(([game, playerInfo]) => game);
 
-// For this gameId, we need to copy all cards in card_list table into game_cards table, shuffled
-// * select * from card_list => array of cards
-// * shuffle that array
-// * insert all of that into game_cards:
-//    * game id we create above
-//    * card ids in shuffled order (using the ordering field for the shuffled index)
+const shuffle_cards = (gameId) =>
+  db.one('SELECT * FROM card_list').then((cards) =>
+    cards
+      .sort((a, b) => Math.random() - 0.5)
+      .map((card, order) => ({ ...card, order }))
+      .then((shuffledCards) => {
+        return db.tx((transaction) => {
+          transaction.batch(
+            shuffledCards.map((card) => {
+              db.one('INSERT INTO game_cards(game_id, card_id, ordering) VALUES(${game_id}, ${id}, ${order})', {
+                game_id: gameId,
+                ...card,
+              });
+            })
+          );
+        });
+      })
+      .then((result) => {
+        // result is going to be an array of nulls so it doesnt matter, but we can proceed with the rest of the logic here
+        // return the game object
+      })
+  );
 
 const addPlayer = (gameId, userId) =>
   db.one('INSERT INTO game_users VALUES ($1, $2) RETURNING game_id AS id', [gameId, userId]);
@@ -49,4 +65,4 @@ const activeGames = (userId) =>
     })
     .catch(console.log);
 
-module.exports = { allOpenGames, create, addPlayer, findById, activeGames };
+module.exports = { allOpenGames, create, shuffle_cards, addPlayer, findById, activeGames };

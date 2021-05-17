@@ -10,6 +10,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn('game_isers', 'player_order');
+    return queryInterface.removeColumn('game_users', 'player_order');
   },
 };
