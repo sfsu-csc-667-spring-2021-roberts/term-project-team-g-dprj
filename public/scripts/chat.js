@@ -38,7 +38,7 @@ const sendMessage = () => {
 
   fetch(`/chat/${gameId}`, {
     headers: { 'Content-Type': 'application/json' },
-    method: 'post',
+    method: 'include',
     body: JSON.stringify({ message }),
   }).catch(console.log);
 };
