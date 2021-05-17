@@ -10,28 +10,36 @@
 
 #game-table .player.current {
   border: 1px solid #369;
-  width: 100%;
+  width: 90%;
   bottom: 0px;
+}
+
+#player-41 {
+  left: 50%;
+  bottom: 50%;
+}
+
+#player-44 {
+  left: 50%;
+}
+
+#player-45 {
+  bottom: 0;
+}
+#player-46 {
+  left: 0;
 }
 
 .player.of4 {
   width: 25%;
 }
 
-.player.of4:nth-child(2) {
-  left: 25%;
-}
-
 .player.of3 {
-  width: 33%;
+  width: 45%;
 }
 
 .player.of2 {
   width: 50%;
-}
-
-.player.of2:nth-child(2) {
-  left: 50%;
 }
 
 /* Need to finish defining positions for each of the possible number of players */
@@ -68,7 +76,6 @@
   display: flex;
 }
 .chat {
-  list-style: none;
   margin: 0;
   padding: 0;
 }

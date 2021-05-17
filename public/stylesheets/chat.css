@@ -4,6 +4,7 @@
   border-radius: 0.25rem;
   overflow-y: scroll;
   margin-bottom: 10px;
+  bottom: 0;
 }
 
 #messages .user-icon {

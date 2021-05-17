@@ -1,5 +1,5 @@
 window.dprj = {
-  pusher: new Pusher('60e7f9f036586d685e89', {
+  pusher: new Pusher('593d1a94c77979c88d72', {
     cluster: 'us3',
   }),
 };
