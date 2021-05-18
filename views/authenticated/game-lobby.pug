@@ -5,12 +5,23 @@ block styles
   link(rel="stylesheet" href="/stylesheets/game.css")
 
 block content
-  h1 Game Lobby - #{name}
-
+  .row.py-5
+    h1 Game Lobby : #{name}
+  
   .row
-    h2 Players
-
     .players-list.col
+      .container
+        .row
+          .col-md-10
+            .card.text-white.bg-dark.mb-3
+              .card-header.text-center
+                h5 Game Rules
+              .card-body
+                ol 
+                  -var list = ["Give 1 Defuse card to each player. If 2-3 players, then only put 2 defuse cards back into the deck.", "Shuffle the deck and deal 7 cards to each player.", "Add in Exploding Kittens into the deck the number of cards should equal to the amount of people minus 1. The deck will then be shuffled; this will be the draw pile.","The first player can pass or play a card but in the end their turn by drawing a card from the top of the Draw pile.", "The player who doesn’t explode wins the game."]
+                  each item in list
+                    li.card-text.mb-4.mt-2= item
+      h2 Players
       ul#players-list
         each player in players
           li

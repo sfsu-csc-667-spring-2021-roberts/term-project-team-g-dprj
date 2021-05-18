@@ -13,7 +13,7 @@ block content
   .row
     #game-table.col
       .deck
-        p This is the deck area
+          img(src='/images/MainDeck.png')
       .players
         each player in game.players
           .player(id=`player-${player.id}` class=`of${game.players.length - 1} ${player.current ? 'current' : ''}`)= player.fullname

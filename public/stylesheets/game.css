@@ -13,26 +13,31 @@
   width: 90%;
   bottom: 0px;
 }
-
+/* player-41 is considered the current player */
 #player-41 {
-  left: 50%;
-  bottom: 50%;
+  left: 0%;
+  bottom: 0%;
 }
 
+/* second player */
 #player-44 {
   left: 50%;
-}
-
-#player-45 {
-  left: 0;
   bottom: 50%;
 }
-#player-46 {
-  left: 0;
+
+/* third player */
+#player-45 {
+  left: 50%;
 }
-/* player-47 is considered the current player */
+/* fourth */
+#player-46 {
+  left: 0%;
+}
+
+/* fifth player */
 #player-47 {
-  bottom: 0;
+  left: 0%;
+  bottom: 50%;
 }
 
 .player.of4 {
@@ -45,6 +50,10 @@
 
 .player.of2 {
   width: 50%;
+}
+
+.player.of1 {
+  width: 70%;
 }
 
 /* Need to finish defining positions for each of the possible number of players */
